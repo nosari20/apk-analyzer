@@ -9,7 +9,7 @@ import {ElectronService} from 'ngx-electron';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
-  title = 'Window';
+  title = 'APK Analyzer';
 
  
 

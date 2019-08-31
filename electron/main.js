@@ -15,7 +15,7 @@ function createWindow() {
     width: 800, 
     height: 600 , 
     frame: false,
-    title: 'Window',
+    title: 'APK Analyzer',
     webPreferences: { webSecurity: false }
     
   });

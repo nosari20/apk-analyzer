@@ -1,4 +1,4 @@
-# Cli
+# APK Anlyzer
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.3.
 It also uses [Electron](https://electronjs.org/) to be able to run it as standalone multi-platform application.
