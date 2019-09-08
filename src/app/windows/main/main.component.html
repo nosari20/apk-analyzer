@@ -5,7 +5,8 @@
         File
 
             <ul class="menu-sub">
-                <li>Export to PDF</li>
+                <li (click)="openFileDialog()">Load APK</li>
+                <li>Export</li>
             </ul>
         </div>
         <div class="menu-bg window-close">
@@ -16,6 +17,87 @@
             </ul>
         </div>
     </menu>
+
+
+
+    <div  *ngIf="load" class="loader">
+        <app-loader [_size]="20"></app-loader>
+    </div>
+
+    <div class="tab-title-list">
+        <div class="tab-title" [ngClass]="{'active': activeTab==0}" (click)="changeTab($event, 0)">
+            <span>General</span>
+        </div>
+        <div class="tab-title" [ngClass]="{'active': activeTab==1}" (click)="changeTab($event, 1)">
+            <span>Signature</span>
+        </div>
+
+       
+    </div> 
+
+
+    <div class="tab-content-list">
+        <div class="tab-content" [ngClass]="{'active': activeTab==0}">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Icon</th>
+                            <td><img *ngIf="info.manifest != undefined " style="width: 50px;"src="{{'data:image/png;base64,'+info.resources?.applicationIcon.data}}"></td>                            
+                        </tr>
+                        <tr>
+                            <th>Application Label</th>
+                            <td>{{info.manifest?.labels[0].value}}</td>                            
+                        </tr>
+                        <tr>
+                            <th>Application ID</th>
+                            <td>{{info.manifest?.xml.attributes.package}}</td>                            
+                        </tr>
+                        <tr>
+                            <th>Version Name</th>
+                            <td>{{info.manifest?.xml.attributes.versionName}}</td>                            
+                        </tr>
+                        <tr>
+                            <th>Version Code</th>
+                            <td>{{info.manifest?.xml.attributes.versionCode}}</td>                            
+                        </tr>
+                        <tr>
+                            <th>Debuggable</th>
+                            <td>{{info.manifest?.xml.children.application[0].attributes.debuggable}}</td>                            
+                        </tr>
+                        <tr>
+                            <th>Minimum API Level</th>
+                            <td>{{info.manifest?.xml.children['uses-sdk'][0].attributes.minSdkVersion}}</td>                            
+                        </tr>
+                        <tr>
+                            <th>Target API Level</th>
+                            <td>{{info.manifest?.xml.children['uses-sdk'][0].attributes.targetSdkVersion}}</td>                            
+                        </tr>
+                        
+                        
+                    </tbody>
+                </table>
+        </div>
+
+        <div class="tab-content" [ngClass]="{'active': activeTab==1}">
+            <table>
+                <tbody>
+                    <tr>
+                        <th>Issuer</th>
+                        <td>{{info.certs?.list[0].issuer.cn}}</td>                            
+                    </tr>
+                    <tr>
+                        <th>Sujet</th>
+                        <td>{{info.certs?.list[0].subjects[0].cn}}</td>                            
+                    </tr>
+                    <tr>
+                        <th>Signature</th>
+                        <td style="text-transform: uppercase; text-align: left">{{info.certs?.list[0].signatures.x509.signature.hashAlgorithm}}<br><pre>{{info.certs?.list[0].signatures.x509.signature.part.sig.data.data | buffToHex}}</pre></td>                            
+                    </tr>
+                    
+                </tbody>
+            </table>
+        </div>
+    </div>  
 
     
 </app-frame>

@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "main": "./electron/main.js",
   "scripts": {
-    "preinstall" :"npm rebuild node-sass",
+    "preinstall": "npm rebuild node-sass",
     "ng": "ng",
     "start": "ng build --base-href && electron .",
-    "build": "electron:win-build",
+    "build": "npm run electron:win-build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -23,7 +23,10 @@
     "@angular/platform-browser": "^7.2.15",
     "@angular/platform-browser-dynamic": "^7.2.15",
     "@angular/router": "^7.2.15",
+    "app-info-parser": "^0.3.3",
     "ngx-electron": "^2.1.1",
+    "node-apk": "^1.0.0",
+    "sshpk": "^1.16.1",
     "zone.js": "^0.10.2"
   },
   "devDependencies": {
