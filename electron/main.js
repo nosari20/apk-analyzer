@@ -4,8 +4,6 @@ const { app, BrowserWindow } = require("electron");
 const path = require("path");
 const url = require("url");
 const ipc = require('electron').ipcMain
-const apk_parser = require('node-apk-parser-promise');
-const AppInfoParser = require('app-info-parser')
 const Apk = require('node-apk');
 const sshpk = require('sshpk');
 
@@ -35,7 +33,7 @@ function createWindow() {
     
   );
 
-  win.openDevTools();
+  //win.openDevTools();
   
 
 
@@ -142,6 +140,8 @@ function IPC_LoadApk(){
       if (typeof label !== "string") {
           const all = resources.resolve(label);
           res.manifest.labels = all;  
+      }else{
+        res.manifest.labels = [{value: label}];
       }
 
       let iconFile = resources.resolve(manifest.applicationIcon).filter(r => r.value.endsWith('.png'))[0].value;
